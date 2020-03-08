@@ -1,0 +1,45 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Итоговая аттестация{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/exams.min.css' %}">	
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">Итоговая аттестация</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="exams">
+		<div class="container">
+			<h2 class="contact-headline"><span class="text">Итоговая аттестация</span></h2>
+			<ul class="exams-list">
+				{% for exam in exams %}
+					<li class="exam">
+						<div class="top-part" style="background-image: url('{{ exam.Preview.url }}')"></div>
+						<div class="bottom-part">
+							<h3 class="exam-headline"><span class="text">{{ exam.Title }}</span></h3>
+							<p class="description">{{ exam.Text }}</p>
+							<a href="{% url 'article' exam.id %}"><button class="btn">Подробнее</button></a>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	
+{% endblock %}

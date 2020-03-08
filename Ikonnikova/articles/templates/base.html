@@ -1,0 +1,113 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}{% endblock %}</title>
+
+	<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/png">
+	<link rel="stylesheet" href="{% static 'libs-min/animate.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css-min/header-footer.min.css' %}">
+	{% block styles %}{% endblock %}
+</head>
+<body>
+	<header class="header">
+		<div class="container">
+			<ul class="menu-list">
+				<li class="logo">
+					<a href="/" class="to-main-page">Иконникова Н.И.</a>
+				</li>
+				<li class="menu-element">
+					<a href="{% url 'portfolio' %}" class="to-inner-page">Портфолио</a>
+				</li>
+				<li class="menu-element">
+					<a href="{% url 'myDevelopments' %}" class="to-inner-page">Мои разработки</a>
+				</li>
+				<li class="menu-element">
+					<a href="{% url 'contact' %}" class="to-inner-page">Контакты</a>
+				</li>				
+				<li class="menu-element">
+					<a href="{% url 'exams' %}" class="to-inner-page">ГИА</a>
+				</li>				
+				<li class="menu-element">
+					<a href="{% url 'regulations' %}" class="to-inner-page">Нормативные документы</a>
+				</li>
+				<li class="menu-element">
+					<a href="{% url 'parents' %}" class="to-inner-page">Родителям</a>
+				</li>
+				<li class="menu-element">
+					<a href="{% url 'students' %}" class="to-inner-page">Ученикам</a>
+				</li>
+				<li class="menu-block">
+						<span class="menu-icon menu-action">
+							<span class="line"></span>
+							<span class="line"></span>
+							<span class="line"></span>
+						</span>
+						<div id="menu-screen" class="menu-screen">
+							<div class="overflow-hidden-screen">
+								<div class="header">
+									<div class="container">
+										<ul class="menu-list">
+											<li class="logo"><a href="/" class="to-main-page">Иконникова Н.И.</a></li>
+											<li class="menu-block">
+												<span class="menu-icon menu-action">
+													<span class="line"></span>
+													<span class="line"></span>
+													<span class="line"></span>
+												</span>
+											</li>
+										</ul>
+									</div>
+								</div>
+								<div class="container">
+									<ul class="categories">
+										<li class="category">
+											<a href="{% url 'portfolio' %}" class="to-inner-page">Портфолио</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'contact' %}" class="to-inner-page">Контакты</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'myDevelopments' %}" class="to-inner-page">Мои разработки</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'exams' %}" class="to-inner-page">ГИА</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'regulations' %}" class="to-inner-page">Нормативные документы</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'parents' %}" class="to-inner-page">Родителям</a>
+										</li>
+										<li class="category">
+											<a href="{% url 'students' %}" class="to-inner-page">Ученикам</a>
+										</li>
+									</ul>						
+								</div>
+							</div>
+						</div>
+					</li>
+			</ul>
+		</div>
+	</header>
+	{% block content %}
+	{% endblock %}
+	<footer class="footer">
+		<div class="container">
+			<ul class="footer-menu">
+				<li class="logo"><a href="/" class="to-main-page">Иконникова Н.И.</a></li>
+				<li class="copyright">
+					<p class="copyright-text">© Иконникова Н.И. Публикация материалов с сайта разрешена только при наличии активной ссылки на главную страницу.</p>
+				</li>
+			</ul>
+		</div>
+	</footer>
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{% static 'js-min/header.min.js' %}"></script>
+	{% block scripts %}
+	{% endblock %}
+</body>
+</html>

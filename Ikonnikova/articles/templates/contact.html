@@ -1,0 +1,82 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Контакты{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/contact.min.css' %}">	
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">Контакты</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="contact-feedback">
+		<div class="container">
+			<div class="flex-block">
+				<div class="contact">
+					<h2 class="contact-headline"><span class="text">Контакты</span></h2>
+					<p class="contact-content">
+						{% for contact in personalContacts %}
+							<span class="title">{{ contact.Title }}</span>: {{ contact.Value }}<br>
+						{% endfor %}
+						<br><span class="title">{{ school.Text }}</span><br>
+						{% for contact in schoolContacts %}
+							<span class="title">{{ contact.Title }}</span>: {{ contact.Value }}<br>
+						{% endfor %}
+				</div>
+				<div class="feedback-block">
+					<form class="feedback" action="{% url 'questionCreate' %}" method="POST">
+						{% csrf_token %}
+						<h3 class="feedback-headline">Остались вопросы?</h3>
+						{{ form.Email }}
+						{{ form.Text }}
+						<button class="submit" type="submit">Отправить</button>
+						<p class="description">Ответ на вопрос будет отправлен на указанную электронную почту</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="last-articles">
+		<div class="container">
+			<h2 class="articles-headline"><span class="text">Последние статьи</span></h2>
+			<ul class="articles-list">
+				{% for article in articles %}			
+					<li class="article">
+						<div class="top-part" style="background-image: url('{{ article.Preview.url }}') "></div>
+						<div class="bottom-part">
+							<div class="left-part">
+								<h3 class="article-headline">{{ article.Title }}</h3>
+								<p class="text-preview">{{ article.Text|truncatechars:50 }}</p>
+								<h4 class="date-and-category">{{ article.Pub_date }} &#8226; {{ article.Category }}</h4>
+							</div>
+							<div class="right-part">
+								<a href="{% url 'article' article.id %}" class="to-article">
+									<div class="learn-more-button">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+									</div>
+								</a>
+							</div>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>	
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	
+{% endblock %}

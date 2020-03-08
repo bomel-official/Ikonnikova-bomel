@@ -1,0 +1,64 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Мои разработки{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/my-developments.min.css' %}">
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">Мои разработки</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="my-devs">
+		<div class="container">
+			<h2 class="my-devs-headline"><span class="text">Мои разработки</span></h2>
+			{% for category in categories %}
+				<div class="devs-category">
+					<h3 class="category-headline"><span class="text">{{ category.Title }}</span></h3>
+					<ul class="my-devs-list">
+						{% for dev in devs %}	
+							{% if dev.Category.id == category.id %}			
+								<li class="dev">
+									<div class="top-part" style="background-image: url('{{ dev.Preview.url }}') "></div>
+									<div class="bottom-part">
+										<div class="left-part">
+											<h3 class="dev-headline">{{ dev.Title }}</h3>
+											<p class="text-preview">{{ dev.Text|truncatechars:50 }}</p>
+											<h4 class="date-and-category">{{ dev.Pub_date }} &#8226; {{ dev.Category }}</h4>
+										</div>
+										<div class="right-part">
+											<a href="{% url 'development' dev.id %}" class="to-article">
+												<div class="learn-more-button">
+													<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+												</div>
+											</a>
+										</div>
+									</div>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>					
+					<div class="all-devs">
+						<span class="all-devs-btn">Все {{ category.Title|lower }}</span>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	<script type="text/javascript" src="{% static 'js-min/my-developments.min.js' %}"></script>	
+{% endblock %}

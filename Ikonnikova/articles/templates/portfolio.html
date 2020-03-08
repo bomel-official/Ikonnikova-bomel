@@ -1,0 +1,89 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}Портфолио{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/portfolio.min.css' %}">	
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">Портфолио</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="awards">
+		<div class="container">
+			<h2 class="awards-headline"><span class="text">Портфолио</span></h2>
+			<div class="quote-block">
+				<p class="quote-text">{{ quoteText.Text }}</p>
+				<div class="quote-author">
+					<div class="avatar">
+						<img src="{% static 'images/avatar.jpg' %}" alt="Teacher's avatar">
+					</div>
+					<p class="author">{{ quoteAuthor.Text }}</p>
+				</div>
+			</div>
+			<h1><span class="text">Награды</span></h1>
+			<ul class="awards-list" id="awards-list">
+				{% for award in awards %}
+					<li class="award">
+						<img src="{{ award.Image.url }}" alt="Award">
+						<div class="year-label">{{ award.Year }} год</div>
+					</li>
+				{% endfor %}
+			</ul>
+			<div class="all-awards">
+				<span class="btn" id="all-awards-btn">Все награды</span>
+			</div>
+		</div>
+	</section>
+
+	<section class="education">
+		<div class="container">
+			<h2 class="education-headline"><span class="text">Сведения об образовании</span></h2>
+			<ul class="education-list">
+				<li class="element">
+					<img src="{% static 'images/usa.jpg' %}" alt="USA diploma" class="diploma">
+					<div class="right-part">
+						<div class="text">
+							<h3 class="diploma-year">2007 год</h3>
+							<p class="description">Стажировка по специальности в Соединенных штатах Америки</p>
+						</div>
+					</div>
+				</li>
+				<li class="element">					
+					<img src="{% static 'images/bakalavr.jpg' %}" alt="USA diploma" class="diploma">
+					<div class="right-part">
+						<div class="text">
+							<h3 class="diploma-year">2008 год</h3>
+							<p class="description">Нижнетагильская государственная социально-педагогическая академия, бакалавр филологического образования, профиль: иностранный язык (диплом с отличием)</p>
+						</div>
+					</div>
+				</li>
+				<li class="element">					
+					<img src="{% static 'images/magistr.jpg' %}" alt="USA diploma" class="diploma">
+					<div class="right-part">
+						<div class="text">
+							<h3 class="diploma-year">2010 год</h3>
+							<p class="description">Нижнетагильская государственная социально-педагогическая академия, магистр филологического образования, профиль: иностранный язык</p>
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	<script type="text/javascript" src="{% static 'js-min/portfolio.min.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}{{ article.Title }}{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/article.min.css' %}">	
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">{{ article.Title }}</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="article-feedback">
+		<div class="container">
+			<div class="flex-block">
+				<div class="article">
+					<h2 class="contact-headline"><span class="text">{{ article.Title }}</span></h2>
+					<img src="{{ article.Preview.url }}" alt="Article's preview">
+					<p class="article-content">{{ article.Text|linebreaksbr }}</p>
+					<div class="files">
+						{% for file in files %}
+							<a href="{{ file.File.url }}" download class="file">
+								<span class="text">{{ file.Title }}</span>
+								<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<path d="M19 13V17C19 17.5304 18.7893 18.0391 18.4142 18.4142C18.0391 18.7893 17.5304 19 17 19H3C2.46957 19 1.96086 18.7893 1.58579 18.4142C1.21071 18.0391 1 17.5304 1 17V13" stroke="#AF8E4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M5 8L10 13L15 8" stroke="#AF8E4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+									<path d="M10 13V1" stroke="#AF8E4E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+								</svg>
+							</a>
+						{% endfor %}
+					</div>
+				</div>
+				<div class="feedback-block">
+					<form class="feedback" action="{% url 'questionCreate' %}" method="POST">
+						{% csrf_token %}
+						<h3 class="feedback-headline">Остались вопросы?</h3>
+						{{ form.Email }}
+						{{ form.Text }}
+						<button class="submit" type="submit">Отправить</button>
+						<p class="description">Ответ на вопрос будет отправлен на указанную электронную почту</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="last-articles">
+		<div class="container">
+			<h2 class="articles-headline"><span class="text">Похожие статьи</span></h2>
+			<ul class="articles-list">
+				{% for sameArticle in sameArticles %}			
+					<li class="article">
+						<div class="top-part" style="background-image: url('{{ sameArticle.Preview.url }}') "></div>
+						<div class="bottom-part">
+							<div class="left-part">
+								<h3 class="article-headline">{{ sameArticle.Title }}</h3>
+								<p class="text-preview">{{ sameArticle.Text|truncatechars:50 }}</p>
+								<h4 class="date-and-category">{{ sameArticle.Pub_date }} &#8226; {{ sameArticle.Category }}</h4>
+							</div>
+							<div class="right-part">
+								<a href="{% url 'article' sameArticle.id %}" class="to-article">
+									<div class="learn-more-button">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+									</div>
+								</a>
+							</div>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>	
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	
+{% endblock %}

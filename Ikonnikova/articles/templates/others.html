@@ -1,0 +1,87 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block title %}{{ section }}{% endblock %}
+
+
+{% block styles %}
+	<link rel="stylesheet" href="{% static 'css-min/article.min.css' %}">	
+{% endblock %}
+
+
+{% block content %}
+	<section class="bread-crumbs">
+		<div class="container">
+			<ul class="links">
+				<li class="bread-link active"><a class="crumbs-link" href="/">Главная</a></li>
+				<li class="bullet bread-link">•</li>
+				<li class="bread-link">{{ section }}</li>
+			</ul>
+		</div>
+	</section>
+
+	<section class="article-feedback">
+		<div class="container">
+			<div class="flex-block">
+				<div class="article">
+					<h2 class="contact-headline"><span class="text">{{ section }}</span></h2>
+					<img src="{{ img.Image.url }}" alt="Article's preview">
+					<p class="article-content">{{ text.Text|linebreaksbr }}</p>
+				</div>
+				<div class="feedback-block">
+					<form class="feedback" action="{% url 'questionCreate' %}" method="POST">
+						{% csrf_token %}
+						<h3 class="feedback-headline">Остались вопросы?</h3>
+						{{ form.Email }}
+						{{ form.Text }}
+						<button class="submit" type="submit">Отправить</button>
+						<p class="description">Ответ на вопрос будет отправлен на указанную электронную почту</p>
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="parallax-quote">
+		<div class="background-parallax">
+			<img src="{% static 'images/parallax-bg.jpg' %}" alt="library photo" class="parallax-image">
+		</div>
+		<div class="quote-block">
+			<p class="quote-text">{{ quoteText.Text }}</p>
+			<img src="{% static 'images/quote-icon.png' %}" alt="quote icon" width="50" height="50" class="quote-icon">
+			<div class="quote-author">{{ quoteAuthor.Text }}</div>
+		</div>
+	</section>
+
+	<section class="last-articles">
+		<div class="container">
+			<h2 class="articles-headline"><span class="text">Последние статьи</span></h2>
+			<ul class="articles-list">
+				{% for article in articles %}			
+					<li class="article">
+						<div class="top-part" style="background-image: url('{{ article.Preview.url }}') "></div>
+						<div class="bottom-part">
+							<div class="left-part">
+								<h3 class="article-headline">{{ article.Title }}</h3>
+								<p class="text-preview">{{ article.Text|truncatechars:50 }}</p>
+								<h4 class="date-and-category">{{ article.Pub_date }} &#8226; {{ article.Category }}</h4>
+							</div>
+							<div class="right-part">
+								<a href="{% url 'article' article.id %}" class="to-article">
+									<div class="learn-more-button">
+										<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+									</div>
+								</a>
+							</div>
+						</div>
+					</li>
+				{% endfor %}
+			</ul>	
+		</div>
+	</section>
+{% endblock %}
+
+
+{% block scripts %}
+	
+{% endblock %}
