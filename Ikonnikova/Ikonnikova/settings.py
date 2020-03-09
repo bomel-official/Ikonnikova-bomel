@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'k6cp)%6hm5#82vdhbcgobolxv!-44^n6fbkw-7b$lf!p&b2fjn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['ikonnikovaadmin.pythonanywhere.com']
+ALLOWED_HOSTS = ['ikonikova.pythonanywhere.com']
 
 
 # Application definition
