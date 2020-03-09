@@ -48,6 +48,7 @@ class File(models.Model):
 class Award(models.Model):
 	Year = models.IntegerField("Год")
 	Image = ThumbnailerImageField("Изображение", resize_source = dict(quality=95, size=(500, 750), sharpen=True))
+	Category = models.ForeignKey("AwardCategory", on_delete = models.CASCADE, default = None, blank = True, null = True)
 
 	def __str__(self):
 		return str(self.id)
@@ -55,3 +56,13 @@ class Award(models.Model):
 	class Meta:
 		verbose_name = 'Грамота'
 		verbose_name_plural = 'Грамоты'
+
+class AwardCategory(models.Model):
+	Title = models.CharField("Название категории", max_length = 50)
+
+	def __str__(self):
+		return self.Title
+
+	class Meta:
+		verbose_name = 'Категория грамот'
+		verbose_name_plural = 'Категории грамот'

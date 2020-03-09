@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Article, File, Award
+from .models import Article, File, Award, AwardCategory
 from content.models import Text, Contact, Image
 from questions.forms import QuestionForm
 
@@ -36,6 +36,7 @@ def contact(request):
 
 def portfolio(request):	
 	awards = Award.objects.order_by('-Year')
+	categories = AwardCategory.objects.all()
 	quoteText = Text.objects.get(id = 5)
 	quoteAuthor = Text.objects.get(id = 6)
 

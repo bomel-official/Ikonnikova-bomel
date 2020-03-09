@@ -32,18 +32,24 @@
 					<p class="author">{{ quoteAuthor.Text }}</p>
 				</div>
 			</div>
-			<h1><span class="text">Награды</span></h1>
-			<ul class="awards-list" id="awards-list">
-				{% for award in awards %}
-					<li class="award">
-						<img src="{{ award.Image.url }}" alt="Award">
-						<div class="year-label">{{ award.Year }} год</div>
-					</li>
-				{% endfor %}
-			</ul>
-			<div class="all-awards">
-				<span class="btn" id="all-awards-btn">Все награды</span>
-			</div>
+			{% for cat in categories %}
+				<div class="awards-category">
+					<h3 class="award-headline"><span class="text">{{ cat.Title }}</span></h3>
+					<ul class="awards-list" id="awards-list">
+						{% for award in awards %}
+							{% if award.Category.id == cat.id %}
+								<li class="award">
+									<img src="{{ award.Image.url }}" alt="Award">
+									<div class="year-label">{{ award.Year }} год</div>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+					<div class="all-awards">
+						<span class="all-awards-btn">Все {{ cat.Title|lower }}</span>
+					</div>
+				</div>
+			{% endfor %}
 		</div>
 	</section>
 
